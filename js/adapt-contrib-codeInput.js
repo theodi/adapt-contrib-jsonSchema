@@ -69,6 +69,7 @@ define(function(require) {
                 editor.getSession().setMode("ace/mode/json");
             });
             this.model.set('editor',editor);
+            editor.setValue(this.model.get('_defaultValue'));
         },
 
         clearValidationError: function() {
