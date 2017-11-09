@@ -1,0 +1,33 @@
+<div class="codeinput-inner component-inner" role="region" aria-label="{{_globals._components._codeinput.ariaRegion}}" {{#if _globals._components._codeinput.ariaRegion}}tabindex="0"{{/if}}>
+    {{> component this}}
+    {{! complex unless and if combination to set the correct classes for CSS to use in showing marking and disabled states}}
+    <div class="codeinput-widget component-widget {{#unless _isEnabled}} disabled {{#if _isInteractionComplete}} complete submitted show-user-answer {{#if _isCorrect}}correct{{/if}} {{/if}} {{/unless}}">
+       <section id="code-section">
+            <div id="editor" class="editor"></div>
+        <div class="ace_editor ace-monokai" id="error-report">
+            <div class="col" id="validation-detail">
+                <h3 class="text-danger">Invalid input</h3>
+                <p id="validation-message"></p>
+            </div>
+            <div class="col" id="error-detail">
+              <h3 class="text-danger">You have <span id="num-errors">1 error</span></h3>
+
+              <table class="table">
+                <thead>
+                  <tr><th>Field</th><th>Error</th><th>Value</th>
+                </tr></thead>
+                <tbody id="errors">
+                <tr>
+                  <td>.url</td><td>should match format "uri"</td><td>...</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col" id="feedback">
+            </div>
+          </div>
+        </section>
+    </div>
+    <div class="buttons">
+    </div>
+</div>
