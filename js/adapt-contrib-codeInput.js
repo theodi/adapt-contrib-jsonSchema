@@ -1,10 +1,7 @@
 define(function(require) {
     var QuestionView = require('coreViews/questionView');
     var Adapt = require('coreJS/adapt');
-    var ace_model = require('components/adapt-contrib-codeInput/js/ace/ace.js');
-    var theme_monokai = require('components/adapt-contrib-codeInput/js/ace/theme-monokai.js');
-    var worker_json = require('components/adapt-contrib-codeInput/js/ace/worker-json.js');
-    var mode_json = require('components/adapt-contrib-codeInput/js/ace/mode-json.js');
+    var ace = require('libraries/ace');
     var Ajv = require('components/adapt-contrib-codeInput/js/ajv.min.js');
     var genericAnswerIndexOffset = 65536;
 
@@ -64,10 +61,9 @@ define(function(require) {
         },
 
         onQuestionRendered: function() {
-            this.setReadyStatus();
             var editor;
             this.$(".editor").each(function(index) {
-                editor = ace.edit(this);
+                editor = window.ace.edit(this);
                 editor.setTheme("ace/theme/monokai");
                 editor.setShowPrintMargin(false);
                 editor.getSession().setMode("ace/mode/json");
@@ -78,6 +74,7 @@ define(function(require) {
             this.$('.buttons-codetoggle').on("click", function() {
                 codeinput.show();
             });
+            this.setReadyStatus();
         },
 
         clearValidationError: function() {
