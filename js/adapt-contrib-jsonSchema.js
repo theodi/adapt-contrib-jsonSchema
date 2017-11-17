@@ -2,10 +2,10 @@ define(function(require) {
     var QuestionView = require('coreViews/questionView');
     var Adapt = require('coreJS/adapt');
     var ace = require('libraries/ace');
-    var Ajv = require('components/adapt-contrib-codeInput/js/ajv.min.js');
+    var Ajv = require('components/adapt-contrib-jsonSchema/js/ajv.min.js');
     var genericAnswerIndexOffset = 65536;
 
-    var CodeInput = QuestionView.extend({
+    var JsonSchema = QuestionView.extend({
         events: {
             "focus input":"clearValidationError"
         },
@@ -246,7 +246,7 @@ define(function(require) {
         }
     });
 
-    Adapt.register("codeinput", CodeInput);
+    Adapt.register("codeinput", JsonSchema);
 
-    return CodeInput;
+    return JsonSchema;
 });

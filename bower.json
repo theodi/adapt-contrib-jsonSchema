@@ -1,13 +1,13 @@
 {
-  "name": "adapt-contrib-codeInput",
-  "version": "1.1.1",
+  "name": "adapt-contrib-jsonSchema",
+  "version": "1.2.0",
   "framework": ">=2.0.11",
-  "homepage": "https://github.com/davetaz/adapt-contrib-codeInput",
-  "issues": "https://github.com/davetaz/adapt-contrib-codeInput/issues",
-  "description": "A question component that allows the learner to input text based upon a question stem.",
-  "main": "/js/adapt-contrib-codeInput.js",
-  "displayName" : "Code Input",
-  "component" : "codeinput",
+  "homepage": "https://github.com/davetaz/adapt-contrib-jsonSchema",
+  "issues": "https://github.com/davetaz/adapt-contrib-jsonSchema/issues",
+  "description": "A question component that allows a learner to input JSON data and validate it against a pre-defined schema",
+  "main": "/js/adapt-contrib-jsonSchema.js",
+  "displayName" : "JSON Schema",
+  "component" : "jsonschema",
   "keywords": [
     "adapt-plugin",
     "adapt-component"

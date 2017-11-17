@@ -1,7 +1,7 @@
-<div class="codeinput-inner component-inner" role="region" style="padding: 0px;" aria-label="{{_globals._components._codeinput.ariaRegion}}" {{#if _globals._components._codeinput.ariaRegion}}tabindex="0"{{/if}}>
+<div class="jsonschema-inner component-inner" role="region" style="padding: 0px;" aria-label="{{_globals._components._jsonschema.ariaRegion}}" {{#if _globals._components._jsonschema.ariaRegion}}tabindex="0"{{/if}}>
     {{> component this}}
     {{! complex unless and if combination to set the correct classes for CSS to use in showing marking and disabled states}}
-    <div class="codeinput-widget component-widget {{#unless _isEnabled}} disabled {{#if _isInteractionComplete}} complete submitted show-user-answer {{#if _isCorrect}}correct{{/if}} {{/if}} {{/unless}}">
+    <div class="jsonschema-widget component-widget {{#unless _isEnabled}} disabled {{#if _isInteractionComplete}} complete submitted show-user-answer {{#if _isCorrect}}correct{{/if}} {{/if}} {{/unless}}">
        <section id="code-section">
             <div id="editor" class="editor"></div>
         <div class="ace_editor ace-monokai" id="error-report">
