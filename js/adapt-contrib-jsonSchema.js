@@ -55,11 +55,6 @@ define(function(require) {
         setAllItemsEnabled: function(isEnabled) {
         },
 
-        codeToggle: function() {
-            index = this.$('.codeinput-component').css('z-index');
-            console.log('click' + index);
-        },
-
         onQuestionRendered: function() {
             var editor;
             this.$(".editor").each(function(index) {
@@ -70,10 +65,6 @@ define(function(require) {
             });
             this.model.set('editor',editor);
             editor.setValue(this.model.get('_defaultValue'));
-            codeinput = this.$('.codeinput-widget');
-            this.$('.buttons-codetoggle').on("click", function() {
-                codeinput.show();
-            });
             this.setReadyStatus();
         },
 
@@ -91,7 +82,7 @@ define(function(require) {
         },
 
         showValidationError: function() {
-            this.$(".codeinput-item-textbox").addClass("codeinput-validation-error");
+            this.$(".jsonschema-item-textbox").addClass("jsonschema-validation-error");
         },
 
         //This preserve the state of the users answers for returning or showing the users answer
@@ -215,7 +206,7 @@ define(function(require) {
 
         // Used by the question view to reset the look and feel of the component.
         resetQuestion: function() {
-            this.$('.codeinput-item-textbox').prop('disabled', !this.model.get('_isEnabled')).val('');
+            this.$('.jsonschema-item-textbox').prop('disabled', !this.model.get('_isEnabled')).val('');
 
             this.model.set({
                 _isAtLeastOneCorrectSelection: false,
@@ -246,7 +237,7 @@ define(function(require) {
         }
     });
 
-    Adapt.register("codeinput", JsonSchema);
+    Adapt.register("jsonschema", JsonSchema);
 
     return JsonSchema;
 });
