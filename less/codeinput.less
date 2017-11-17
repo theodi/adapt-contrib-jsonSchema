@@ -1,10 +1,14 @@
 .codeinput-inner {
+    overflow-y: hidden;
     .buttons {
         margin-top: 0px;
         margin-bottom: 0px;
         button.buttons-feedback {
             display: none;
         }
+	   .disabled {
+	       opacity:0;
+	   }
     }
     #error-report {
         margin-top: 1px; 
@@ -22,6 +26,9 @@
         #editor {
             height: 400px;
             position: relative;
+            .ace_print-margin {
+	    	display: none;
+	    }
         }
         #validation-detail {
             display: none;
@@ -32,7 +39,12 @@
         #error-detail {
             display: none;
         }
-
     }
-
+}
+.codeinput-component {
+    @media all and (max-width: (@device-width-medium )) {
+        position: fixed;
+        top: 64px;
+        //z-index: -10;
+    }
 }

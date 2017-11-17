@@ -5,8 +5,7 @@ define(function(require) {
     var theme_monokai = require('components/adapt-contrib-codeInput/js/ace/theme-monokai.js');
     var worker_json = require('components/adapt-contrib-codeInput/js/ace/worker-json.js');
     var mode_json = require('components/adapt-contrib-codeInput/js/ace/mode-json.js');
-    var Ajv = require('components/adapt-contrib-codeInput/js/ajv.min.js')
-
+    var Ajv = require('components/adapt-contrib-codeInput/js/ajv.min.js');
     var genericAnswerIndexOffset = 65536;
 
     var CodeInput = QuestionView.extend({
@@ -59,6 +58,11 @@ define(function(require) {
         setAllItemsEnabled: function(isEnabled) {
         },
 
+        codeToggle: function() {
+            index = this.$('.codeinput-component').css('z-index');
+            console.log('click' + index);
+        },
+
         onQuestionRendered: function() {
             this.setReadyStatus();
             var editor;
@@ -70,6 +74,11 @@ define(function(require) {
             });
             this.model.set('editor',editor);
             editor.setValue(this.model.get('_defaultValue'));
+            codeinput = this.$('.codeinput-widget');
+            codeinput.hide();
+            this.$('.buttons-codetoggle').on("click", function() {
+                codeinput.show();
+            });
         },
 
         clearValidationError: function() {

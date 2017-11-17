@@ -1,4 +1,4 @@
-<div class="codeinput-inner component-inner" role="region" aria-label="{{_globals._components._codeinput.ariaRegion}}" {{#if _globals._components._codeinput.ariaRegion}}tabindex="0"{{/if}}>
+<div class="codeinput-inner component-inner" role="region" style="padding: 0px;" aria-label="{{_globals._components._codeinput.ariaRegion}}" {{#if _globals._components._codeinput.ariaRegion}}tabindex="0"{{/if}}>
     {{> component this}}
     {{! complex unless and if combination to set the correct classes for CSS to use in showing marking and disabled states}}
     <div class="codeinput-widget component-widget {{#unless _isEnabled}} disabled {{#if _isInteractionComplete}} complete submitted show-user-answer {{#if _isCorrect}}correct{{/if}} {{/if}} {{/unless}}">
@@ -27,6 +27,9 @@
             </div>
           </div>
         </section>
+    </div>
+    <div class="codeButton">
+      <button class="buttons-codetoggle buttons-action-fullwidth buttons-action-enlarge" aria-label="codetoggle" tabindex="0">Show code</button>
     </div>
     <div class="buttons">
     </div>
