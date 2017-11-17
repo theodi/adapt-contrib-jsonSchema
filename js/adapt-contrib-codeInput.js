@@ -75,7 +75,6 @@ define(function(require) {
             this.model.set('editor',editor);
             editor.setValue(this.model.get('_defaultValue'));
             codeinput = this.$('.codeinput-widget');
-            codeinput.hide();
             this.$('.buttons-codetoggle').on("click", function() {
                 codeinput.show();
             });
