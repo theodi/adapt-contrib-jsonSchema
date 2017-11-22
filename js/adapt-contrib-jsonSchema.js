@@ -64,7 +64,14 @@ define(function(require) {
                 editor.getSession().setMode("ace/mode/json");
             });
             this.model.set('editor',editor);
-            editor.setValue(this.model.get('_defaultValue'));
+            var area = document.createElement('div');
+            area.innerHTML = this.model.get('_defaultValue'); 
+            content = area.innerText.replace(/ /g,"\n").replace(/}/g,"\n}");
+            editor.setValue(content);
+            //this.listenTo(Adapt, "slider:moveRight", function(block) {
+            //    console.log('moving');
+            //    console.log(block.find('jsonschema-component'));
+            //});
             this.setReadyStatus();
         },
 
@@ -122,7 +129,7 @@ define(function(require) {
             this.$("#error-detail").hide();
             var type = "event";
             try {
-                type = json.type;
+                type = (json.type).toLowerCase();
             } catch (e) {
                 type = "event";
             }
@@ -149,6 +156,7 @@ define(function(require) {
                     var valid = validate( json );
                     if (valid) {
                         foo.setCorrect(true);
+                        window.localStorage.setItem('userJSON',JSON.stringify(json));
                         return true;
                     } else {
                         var errors = "";
