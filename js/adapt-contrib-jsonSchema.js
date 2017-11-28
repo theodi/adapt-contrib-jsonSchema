@@ -287,7 +287,7 @@ define(function(require) {
                 var current = "";
                 try {
                     current = editor.getValue();
-                    if (current != "") {
+                    if (current != "" || !lastJSON) {
                     } else {
                         editor.setValue(JSON.stringify(lastJSON,null,2));
                         window.localStorage.removeItem('_lastAnswer');
