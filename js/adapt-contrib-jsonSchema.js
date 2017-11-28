@@ -23,8 +23,10 @@ define(function(require) {
         restoreUserAnswer: function() {
             if (!this.model.get("_isSubmitted")) return;
 
-            var userAnswer = this.model.get("_userAnswer");
-
+            var editor = this.model.get('editor');
+            var userAnswer = this.model.get("_userAnswer");         
+            editor.setValue(userAnswer);
+           
             this.setQuestionAsSubmitted();
             this.markQuestion();
             this.setScore();
@@ -55,6 +57,16 @@ define(function(require) {
         setAllItemsEnabled: function(isEnabled) {
         },
 
+        processContent: function(area) {
+            var content = area.innerText.replace(/ /g,"\n").replace(/}/g,"\n}").replace(/^\n/g,"");
+            try {
+                parsed = JSON.parse(content);
+                return (JSON.stringify(parsed, null, 2).replace(/{}/g,"{\n\n}"));
+            } catch (err) {
+            }
+            return content;
+        },
+
         onQuestionRendered: function() {
             var editor;
             this.$(".editor").each(function(index) {
@@ -64,14 +76,16 @@ define(function(require) {
                 editor.getSession().setMode("ace/mode/json");
             });
             this.model.set('editor',editor);
-            var area = document.createElement('div');
-            area.innerHTML = this.model.get('_defaultValue'); 
-            content = area.innerText.replace(/ /g,"\n").replace(/}/g,"\n}");
-            editor.setValue(content);
-            //this.listenTo(Adapt, "slider:moveRight", function(block) {
-            //    console.log('moving');
-            //    console.log(block.find('jsonschema-component'));
-            //});
+            var userAnswer = this.model.get('_userAnswer');
+            if (!userAnswer) {
+                var area = document.createElement('div');
+                area.innerHTML = this.model.get('_defaultValue'); 
+                editor.setValue(this.processContent(area));
+            } else {
+                editor.setValue(userAnswer);
+            }
+            this.$('.editor').on('inview', _.bind(this.inview, this));
+            this.setupInview();
             this.setReadyStatus();
         },
 
@@ -156,7 +170,7 @@ define(function(require) {
                     var valid = validate( json );
                     if (valid) {
                         foo.setCorrect(true);
-                        window.localStorage.setItem('userJSON',JSON.stringify(json));
+                        window.localStorage.setItem('_lastAnswer',userAnswer);
                         return true;
                     } else {
                         var errors = "";
@@ -242,6 +256,44 @@ define(function(require) {
         */
         getResponseType: function() {
             return "fill-in";
+        },
+
+        setupInview: function() {
+            var selector = this.getInviewElementSelector();
+
+            if (!selector) {
+                //this.setCompletionStatus();
+            } else {
+                this.model.set('inviewElementSelector', selector);
+                this.$(selector).on('inview', _.bind(this.inview, this));
+            }
+        },
+
+        getInviewElementSelector: function() {
+            if(this.model.get('body')) return '.component-body';
+
+            if(this.model.get('instruction')) return '.component-instruction';
+            
+            if(this.model.get('displayTitle')) return '.component-title';
+
+            return null;
+        },
+        
+        inview: function(event, visible, visiblePartX, visiblePartY) {
+            if (visible) {
+                editor = this.model.get('editor');
+                lastAnswer = window.localStorage.getItem('_lastAnswer');
+                lastJSON = JSON.parse(lastAnswer);
+                var current = "";
+                try {
+                    current = editor.getValue();
+                    if (current != "") {
+                    } else {
+                        editor.setValue(JSON.stringify(lastJSON,null,2));
+                        window.localStorage.removeItem('_lastAnswer');
+                    }
+                } catch (err) {}
+            }
         }
     });
 
