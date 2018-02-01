@@ -22,7 +22,7 @@ define(function(require) {
 
         restoreUserAnswer: function() {
             if (!this.model.get("_isSubmitted")) return;
-
+/*
             var editor = this.model.get('editor');
             var userAnswer = this.model.get("_userAnswer");         
             editor.setValue(userAnswer);
@@ -32,6 +32,7 @@ define(function(require) {
             this.setScore();
             this.showMarking();
             this.setupFeedback();
+            */
         },
 
         showFeedback: function() {
